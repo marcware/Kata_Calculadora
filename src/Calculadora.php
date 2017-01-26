@@ -23,6 +23,12 @@ class Calculadora
      */
     public function sumar($numeroUno, $numeroDos)
     {
+        if (!is_numeric($numeroUno) or !is_numeric($numeroDos)) {
+            throw  new \InvalidArgumentException();
+        }
+
         return $numeroUno + $numeroDos;
+
     }
+
 }
