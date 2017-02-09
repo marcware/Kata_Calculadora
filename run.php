@@ -8,6 +8,6 @@ $calculadora = new Calculadora();
 
 echo $calculadora->sumar(2, 2);
 
-//echo $calculadora->sumar('a', 'b');
+echo $calculadora->sumar('a', 'b');
 
 ///echo $calculadora->sumar(2, 2);

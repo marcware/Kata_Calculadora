@@ -24,14 +24,14 @@ class Test extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->calculadora = new Calculadora();
+    //    $this->calculadora = new Calculadora();
 
     }
 
     /**
      * @return array
      */
-    public function numerosParaCalcular()
+    public function numerosParaCalcularSuma()
     {
         return [
             [2, 2, 4],
@@ -40,28 +40,97 @@ class Test extends \PHPUnit_Framework_TestCase
         ];
     }
 
+
     /**
      * @test
-     * @dataProvider numerosParaCalcular
+     * @dataProvider numerosParaCalcularSuma
      */
     public function insertarNumeros($numeroUno, $numeroDos, $suma)
     {
         $calculadora = new Calculadora();
-        $this->assertEquals($suma, $this->calculadora->sumar($numeroUno, $numeroDos), "no es un valor correcto");
+        $calculadora->setNumeroUno($numeroUno);
+        $calculadora->setNumeroDos($numeroDos);
+        $calculadora->sumar();
 
+        $this->assertEquals($suma,  $calculadora->getResultado(), "no es un valor correcto");
+
+    }
+
+
+    /**
+     * @return array
+     */
+    public function numerosParaCalcularRestar()
+    {
+        return [
+            [6, 2, 4],
+            [2.5, 2.5, 0],
+            [-3, 1, -4],
+        ];
     }
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     *
+     * @dataProvider numerosParaCalcularRestar
      */
-    public function crearExcepcionAlPasarValoresIncorrectos()
+    public function pruebaRestar($numeroUno, $numeroDos, $resultado)
     {
-        //$calculadora = new Calculadora();
-        $this->calculadora->sumar('a', []);
+        $calculadora = new Calculadora();
+        $calculadora->setNumeroUno($numeroUno);
+        $calculadora->setNumeroDos($numeroDos);
+        $calculadora->restar();
 
+        $this->assertEquals($resultado,  $calculadora->getResultado(), "no es un valor correcto");
     }
 
+    /**
+     * @return array
+     */
+    public function numerosParaCalcularMultiplicar()
+    {
+        return [
+            [6, 2, 12],
+            [2.5, 2.5, 6.25],
+            [-3, 1, -3],
+            [-3, 0, 0],
+        ];
+    }
+    /**
+     * @test
+     * @dataProvider numerosParaCalcularMultiplicar
+     */
+    public function pruebaMultiplicar($numeroUno, $numeroDos, $resultado)
+    {
+        $calculadora = new Calculadora();
+        $calculadora->setNumeroUno($numeroUno);
+        $calculadora->setNumeroDos($numeroDos);
+        $calculadora->multiplicar();
+
+        $this->assertEquals($resultado, $calculadora->getResultado(), "multiplicación no correcta");
+    }
+
+    /**
+     * @return array
+     */
+    public function numerosParaCalcularDividir()
+    {
+        return [
+            [6, 2, 3],
+            [9.5, 2, 4.75],
+        ];
+    }
+    /**
+     * @test
+     * @dataProvider numerosParaCalcularDividir
+     */
+    public function pruebaDividir($numeroUno, $numeroDos, $resultado)
+    {
+        $calculadora = new Calculadora();
+        $calculadora->setNumeroUno($numeroUno);
+        $calculadora->setNumeroDos($numeroDos);
+        $calculadora->dividir();
+
+        $this->assertEquals($resultado, $calculadora->getResultado(), "división no correcta");
+    }
 
 }
