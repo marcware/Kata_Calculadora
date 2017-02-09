@@ -58,7 +58,7 @@ class Test extends \PHPUnit_Framework_TestCase
      */
     public function crearExcepcionAlPasarValoresIncorrectos()
     {
-        $calculadora = new Calculadora();
+        //$calculadora = new Calculadora();
         $this->calculadora->sumar('a', []);
 
     }
